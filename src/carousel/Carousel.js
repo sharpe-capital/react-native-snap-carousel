@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Animated, Easing, FlatList, I18nManager, Platform, ScrollView, View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import shallowCompare from 'react-addons-shallow-compare';
 import {
     defaultScrollInterpolator,
     stackScrollInterpolator,
@@ -62,7 +61,6 @@ export default class Carousel extends Component {
         scrollInterpolator: PropTypes.func,
         slideInterpolatedStyle: PropTypes.func,
         slideStyle: ViewPropTypes ? ViewPropTypes.style : View.propTypes.style,
-        shouldOptimizeUpdates: PropTypes.bool,
         swipeThreshold: PropTypes.number,
         useScrollView: PropTypes.bool,
         vertical: PropTypes.bool,
@@ -213,14 +211,6 @@ export default class Carousel extends Component {
                 apparitionCallback();
             }
         });
-    }
-
-    shouldComponentUpdate (nextProps, nextState) {
-        if (this.props.shouldOptimizeUpdates === false) {
-            return true;
-        } else {
-            return shallowCompare(this, nextProps, nextState);
-        }
     }
 
     componentWillReceiveProps (nextProps) {
